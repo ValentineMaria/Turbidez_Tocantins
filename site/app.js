@@ -130,7 +130,7 @@
 
   // ---------------- estilos ----------------
   function estiloTrecho(f) {
-    const p = f.properties, a = D.atT[p.idx], perto = mapa.getZoom() >= 11 && temPixels, sel = selec === f;
+    const p = f.properties, a = D.atT[p.idx], perto = mapa.getZoom() >= 10 && temPixels, sel = selec === f;
     const w = Math.max(2, Math.min(7, 2 + 2.4 * Math.log10((p.largura_m || 60) / 60)));
     return {
       color: sel ? css('--tinta') : cor(a && a.classe), weight: perto ? (sel ? 3 : 1.2) : w + (sel ? 2 : 0),
