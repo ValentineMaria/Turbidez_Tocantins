@@ -149,7 +149,7 @@ def telhas_com_agua(agua, estado, z_grade=10):
         for tent in range(4):
             try:
                 a = G.baixar_bloco(reduzida, T.grade_bloco(tx, ty, z_grade, 1))['agua']
-                return {(tx * fator + i // px, ty * fator + j // px) for j, i in zip(*np.nonzero(a))}
+                return {(int(tx * fator + i // px), int(ty * fator + j // px)) for j, i in zip(*np.nonzero(a))}
             except Exception as e:
                 erro = e
                 time.sleep(5 * (tent + 1))
