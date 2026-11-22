@@ -32,7 +32,7 @@ QC = dict(max_B3=0.25, min_B4=0.002, max_B8A_B4=1.3, max_cv_B4=0.5, min_pix_s2=3
 ZOOM_BASE = 13             # ~19 m por pixel em Tocantins; o mapa amplia até o zoom 15 a partir daqui
 ZOOM_MIN = 9
 BLOCO_TELHAS = 2           # cada pedido ao Earth Engine cobre 2 x 2 telhas (≈ 10 x 10 km)
-PEDIDOS_PARALELOS = 8
+PEDIDOS_PARALELOS = 4      # o nível gratuito do Earth Engine limita pedidos simultâneos
 
 # ---------- classes ----------
 LIMITES_CLASSE = (5, 15)   # NTU

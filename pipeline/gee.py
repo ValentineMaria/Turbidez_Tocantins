@@ -120,7 +120,7 @@ def colecoes(regiao, inicio, fim):
 
 
 def datas_locais(col):
-    ms = col.aggregate_array('system:time_start').getInfo()
+    ms = com_retentativa(lambda: col.aggregate_array('system:time_start').getInfo())
     from datetime import datetime, timezone
     return sorted({(datetime.fromtimestamp(t / 1000, timezone.utc) - timedelta(hours=3)).date().isoformat()
                    for t in ms})
@@ -182,6 +182,24 @@ def variaveis_do_dia(refl, proj, dia, landsat, min_pix, araguaia, chuva_img, hoj
     ]).toFloat().updateMask(ok).set('system:time_start', t))
 
 
+# ---------------------------------------------------------------- utilidades
+def com_retentativa(fn, tentativas=8):
+    """Repete pedidos recusados por excesso de uso simultâneo (erro 429), esperando cada vez mais."""
+    import time
+    for k in range(tentativas):
+        try:
+            return fn()
+        except Exception as e:
+            msg = str(e).lower()
+            temporario = any(t in msg for t in ('too many', 'concurrent', 'rate', 'quota', '429', 'timed out',
+                                                'deadline', 'unavailable', '503', '500'))
+            if not temporario or k == tentativas - 1:
+                raise
+            espera = min(120, 5 * 2 ** k)
+            print(f'  Earth Engine ocupado ({str(e)[:60]}); nova tentativa em {espera} s')
+            time.sleep(espera)
+
+
 # ---------------------------------------------------------------- chuva
 def tabela_chuva(regiao, dias):
     """Chuva (mm) dos 7 dias que terminam em cada data, média por sub-bacia HydroBASINS nível 7.
@@ -199,12 +217,13 @@ def tabela_chuva(regiao, dias):
         return ee.Feature(None, {'dia': d, 'pfaf': fc.aggregate_array('PFAF_ID'),
                                  'mm': fc.aggregate_array('mean')})
 
-    linhas = ee.FeatureCollection(ee.List(dias).map(por_dia)).getInfo()['features']
+    # uma data por vez: pedir todas juntas estoura o limite de agregações simultâneas do nível gratuito
     tab = {}
-    for f in linhas:
-        p = f['properties']
+    for d in dias:
+        p = com_retentativa(lambda: por_dia(d).getInfo()['properties'])
         tab[p['dia']] = {int(k): (v if v is not None else 0.0) for k, v in zip(p['pfaf'], p['mm'])}
-    ultimo = imerg.sort('system:time_start', False).first().date().format('YYYY-MM-dd HH:mm').getInfo()
+    ultimo = com_retentativa(lambda: imerg.sort('system:time_start', False).first().date()
+                             .format('YYYY-MM-dd HH:mm').getInfo())
     return tab, ultimo
 
 
@@ -252,4 +271,5 @@ def imagem_resultado(regiao, estaticos, hoje=None):
 
 def baixar_bloco(imagem, grade):
     """Pede ao Earth Engine um bloco já na grade das telhas. Devolve array estruturado numpy."""
-    return ee.data.computePixels({'expression': imagem, 'fileFormat': 'NUMPY_NDARRAY', 'grid': grade})
+    return com_retentativa(lambda: ee.data.computePixels(
+        {'expression': imagem, 'fileFormat': 'NUMPY_NDARRAY', 'grid': grade}))
