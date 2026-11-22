@@ -1,0 +1,76 @@
+ponto,rio,municipio,lat,lon,bacia,largura_m,no_dominio,ajuste_log10
+1,Rio Araguaia,Araguatins,-5.64955,-48.138605,Rio Araguaia,1254.0,True,-0.0464
+2,Rio Tocantins,Itaguatins,-5.786722,-47.463521,Rio Tocantins,1264.0,True,-0.0281
+3,Rio Araguaia,Xambioá,-6.402787,-48.543655,Rio Araguaia,1508.0,True,-0.0986
+4,Ribeirão Lontra,Araguanã,-6.58215,-48.619239,Rio Araguaia,0.0,False,
+5,Ribeirão Lontra,Araguaína,-7.207617,-48.295786,Rio Araguaia,0.0,False,
+6,Rio Manuel Alves Grande,Goiatins,-7.707923,-47.31177,Rio Tocantins,60.0,True,0.0327
+7,Rio Araguaia,Couto de Magalhães,-8.369289,-49.27695,Rio Araguaia,842.0,True,-0.0573
+8,Rio Tocantins,Itapiratins,-8.392735,-48.107344,Rio Tocantins,548.0,True,-0.1991
+9,Rio Araguaia,Araguacema,-8.801558,-49.555608,Rio Araguaia,214.0,True,-0.0011
+10,Rio do Coco,Caseara,-9.500638,-49.989502,Rio Araguaia,60.0,True,0.0815
+11,Rio do Sono,Rio Sono,-9.309017,-47.932711,Rio Tocantins,118.0,True,0.0643
+12,Rio Tocantins,Miracema do Tocantins,-9.565037,-48.381689,Rio Tocantins,476.0,True,-0.2246
+13,Rio Novo,Novo Acordo,-9.988139,-47.609818,Rio Tocantins,60.0,True,-0.1855
+14,Rio das Balsas,Novo Acordo,-10.016218,-47.819656,Rio Tocantins,60.0,True,0.0743
+15,Rio Novo,Mateiros,-10.549663,-46.759598,Rio Tocantins,60.0,True,-0.4895
+16,Rio Javaés,Pium,-10.564592,-49.936673,Rio Araguaia,118.0,True,-0.0885
+17,Rio Formoso,Lagoa da Confusão,-10.583726,-49.929936,Rio Araguaia,60.0,True,-0.0945
+18,Rio Urubu Grande,Lagoa da Confusão,-10.841198,-49.75883,Rio Araguaia,0.0,False,
+19,Rio Formoso,Dueré,-11.380352,-49.680923,Rio Araguaia,60.0,True,-0.0577
+20,Rio Formoso,Formoso do Araguaia,-11.83984,-49.771742,Rio Araguaia,60.0,True,0.0372
+21,Rio Formoso,Sandolândia,-12.211827,-49.66357,Rio Araguaia,60.0,True,0.1398
+22,Rio Santo Antônio,Peixe,-11.849659,-48.845746,Rio Tocantins,60.0,True,0.3013
+23,Rio Areias,Porto Nacional,-10.876451,-48.356574,Rio Tocantins,0.0,False,
+24,Rio Manuel Alves,Natividade,-11.76224,-47.81804,Rio Tocantins,60.0,True,-0.0684
+25,Rio Manuel Alves,Natividade,-11.897789,-47.563679,Rio Tocantins,60.0,True,0.0326
+26,Rio Palma,Conceição do Tocantins,-12.41961,-47.198392,Rio Tocantins,60.0,True,0.1941
+27,Rio Manuel Alves,Dianópolis,-11.824935,-47.18653,Rio Tocantins,0.0,False,
+28,Rio Palmeiras,Ponte Alta do Bom Jesus,-12.322894,-46.944648,Rio Tocantins,60.0,True,-0.2059
+29,Rio Palma,Aurora do Tocantins,-12.647246,-46.658271,Rio Tocantins,60.0,True,0.0426
+30,Rio Palma,Paranã,-12.603858,-47.861565,Rio Tocantins,118.0,True,0.0312
+31,Rio Manuel Alves Pequeno,Itacajá,-8.388931,-47.767577,Rio Tocantins,0.0,False,
+32,Rio Santo Antônio,Figueirópolis,-12.104535,-49.18535,Rio Tocantins,0.0,False,
+33,Rio Santa Tereza,Peixe,-12.392573,-48.711916,Rio Tocantins,60.0,True,0.0977
+34,Rio São Martinho,Araguatins,-5.788482,-48.178265,Rio Araguaia,0.0,False,
+35,Rio do Coco,Marianópolis do Tocantins,-9.943548,-49.771596,Rio Araguaia,0.0,False,
+36,Rio Piranhas,Dois Irmãos do Tocantins,-9.184341,-49.377872,Rio Araguaia,0.0,False,
+37,Rio Dueré,Lagoa da Confusão,-11.007455,-49.769949,Rio Araguaia,0.0,False,
+38,Rio Manuel Alves Grande,Campos Lindos,-7.973647,-46.885843,Rio Tocantins,0.0,False,
+39,Rio Corda,Riachinho,-6.478141,-48.19015,Rio Araguaia,0.0,False,
+40,Rio Riozinho,Pium,-10.324966,-49.599726,Rio Araguaia,60.0,True,0.2304
+41,Rio Caiapó,Araguacema,-9.126569,-49.742367,Rio Araguaia,60.0,True,-0.0122
+42,Rio Palma,Paranã,-12.604505,-47.859583,Rio Tocantins,60.0,True,0.1499
+43,Rio Xavantes,Dueré,-11.383255,-49.631585,Rio Araguaia,0.0,False,
+44,Rio Manuel Alves,Rio da Conceição,-11.397703,-46.886386,Rio Tocantins,0.0,False,
+45,Rio Providência,Miranorte,-9.529017,-48.606813,Rio Tocantins,0.0,False,
+46,Rio do Sono,Bom Jesus do Tocantins,-8.968376,-48.168788,Rio Tocantins,84.0,True,0.0303
+47,Rio Vermelho,Goiatins,-7.752313,-47.286285,Rio Tocantins,60.0,True,0.0628
+48,Rio das Balsas,Ponte Alta do Tocantins,-10.693949,-47.792843,Rio Tocantins,60.0,True,0.0345
+49,Rio Santa Tereza,Gurupi,-11.982323,-48.655916,Rio Tocantins,60.0,True,0.1768
+50,Rio Corda,Xambioá,-6.35611,-48.352271,Rio Araguaia,0.0,False,
+51,Rio Tocantins,São Sebastião do Tocantins,-5.251237,-48.198163,Rio Tocantins,660.0,True,-0.0115
+52,Rio Piranhas,São Bento do Tocantins,-6.044343,-48.198762,Rio Araguaia,0.0,False,
+53,Rio Tocantins,Aguiarnópolis,-6.570413,-47.463791,Rio Tocantins,802.0,True,-0.1367
+55,Rio Muricizal,Muricilândia,-7.147051,-48.610918,Rio Araguaia,0.0,False,
+56,Rio Tocantins,Palmeirante,-7.859944,-47.920584,Rio Tocantins,376.0,True,0.0573
+57,Rio das Cunhãs,Bernardo Sayão,-7.857316,-48.901271,Rio Araguaia,0.0,False,
+58,Rio Jenipapo,Arapoema,-7.613272,-49.046491,Rio Araguaia,0.0,False,
+59,Rio Araguaia,Pau D'arco,-7.540054,-49.37828,Rio Araguaia,1018.0,True,0.0084
+60,Rio Perdida,Rio Sono,-9.339719,-47.871811,Rio Tocantins,60.0,True,0.1219
+61,Rio dos Mangues,Paraíso do Tocantins,-10.362621,-48.661654,Rio Tocantins,0.0,False,
+62,Rio Crixás,Brejinho de Nazaré,-11.125154,-48.803089,Rio Tocantins,0.0,False,
+63,Rio São Valério,São Valério,-11.639987,-48.391429,Rio Tocantins,0.0,False,
+64,Rio do Peixe,Almas,-11.666005,-47.438855,Rio Tocantins,0.0,False,
+65,Rio Preto,Mateiros,-10.646806,-46.62614,Rio Tocantins,0.0,False,
+66,Rio Tocantins,Barra do Ouro,-7.684234,-47.68828,Rio Tocantins,810.0,True,-0.0252
+67,Rio Balsas,Santa Tereza do Tocantins,-10.269967,-47.835498,Rio Tocantins,0.0,False,
+68,Rio Tocantins,Ipueiras,-11.249917,-48.460921,Rio Tocantins,630.0,True,-0.021
+69,Rio Conceição,Araguaçu,-12.255283,-46.645991,Rio Tocantins,0.0,False,
+70,Rio Escuro,Araguaçu,-12.665805,-49.434537,Rio Araguaia,60.0,True,
+71,Rio Tocantins,Praia Norte,-5.39069,-47.814083,Rio Tocantins,358.0,True,-0.0736
+72,Rio Água Suja,Porto Nacional,-10.537104,-48.371987,Rio Tocantins,584.0,True,0.2271
+75,Rio Canabrava,Alvorada,-12.495597,-48.997631,Rio Tocantins,0.0,False,
+76,Rio Manuel Alves,Santa Rosa do Tocantins,-11.536812,-48.278777,Rio Tocantins,84.0,True,0.0238
+78,Rio Javaés,Formoso do Araguaia,-11.464102,-50.009123,Rio Araguaia,60.0,True,0.0209
+79,Rio Javaés,Sandolândia,-12.092626,-49.940715,Rio Araguaia,60.0,True,0.1199
