@@ -1,0 +1,81 @@
+name: Atualizar mapa
+
+on:
+  schedule:
+    - cron: '17 9 */3 * *'   # a cada 3 dias, 06:17 (Brasília). Diário: troque por '17 9 * * *'
+  workflow_dispatch:
+    inputs:
+      limite_telhas:
+        description: 'Teste rápido: número de telhas perto de Palmas (vazio = estado inteiro)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: mapa
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Testes (sem Earth Engine)
+        run: python pipeline/testar.py
+
+      - name: Calcular o mapa (Earth Engine)
+        env:
+          GEE_SERVICE_ACCOUNT_KEY: ${{ secrets.GEE_SERVICE_ACCOUNT_KEY }}
+          GEE_PROJECT: ${{ vars.GEE_PROJECT }}
+          LIMITE_TELHAS: ${{ inputs.limite_telhas }}
+        run: python pipeline/atualizar.py
+
+      - name: Séries dos pontos
+        run: python pipeline/series.py
+
+      - name: Salvar resumos no repositório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/data dados/historico_app.csv
+          git diff --cached --quiet || git commit -m "Atualiza mapa ($(date -u +%Y-%m-%d))"
+          git push
+
+      - name: Guardar as telhas no ramo "telhas"
+        run: |
+          cd _telhas
+          git init -q -b telhas
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add . && git commit -q -m "Telhas $(date -u +%Y-%m-%d)"
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" telhas
+
+      - name: Montar o site
+        run: |
+          mkdir -p _site/telhas
+          cp -r site/* _site/
+          cp -r _telhas/* _site/telhas/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: publicar
+        uses: actions/deploy-pages@v4
