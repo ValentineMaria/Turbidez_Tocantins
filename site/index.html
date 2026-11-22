@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Turbidez dos rios do Tocantins</title>
+  <meta name="description" content="Mapa da turbidez da água estimada por satélite nos rios do Tocantins, com a série histórica dos pontos de monitoramento da SEMARH.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <div id="mapa" role="region" aria-label="Mapa dos rios do Tocantins"></div>
+
+  <aside id="painel" aria-label="Informações">
+    <button id="alca" class="alca" aria-expanded="false" aria-controls="corpo">
+      <span class="alca-barra" aria-hidden="true"></span><span class="sr">Mostrar mais</span>
+    </button>
+
+    <header class="cabecalho">
+      <h1>Turbidez dos rios do Tocantins</h1>
+      <p class="sub" id="atualizacao">Carregando…</p>
+    </header>
+
+    <section class="escala" aria-label="Escala de cores">
+      <div class="barra" id="barra" aria-hidden="true"></div>
+      <div class="marcas" id="marcas" aria-hidden="true"></div>
+      <p class="resumo" id="resumo"></p>
+    </section>
+
+    <div id="corpo" class="corpo">
+      <section id="detalhe" class="detalhe" aria-live="polite">
+        <div class="vazio">
+          <p>Toque em um rio ou em um ponto de monitoramento.</p>
+          <p class="dica">Aproxime o mapa para ver a água pixel a pixel. Os pontos mostram a série histórica medida pela SEMARH.</p>
+        </div>
+      </section>
+
+      <details class="sobre">
+        <summary>Como a estimativa é feita</summary>
+        <p>A cor da água muda com a quantidade de sedimento em suspensão. Usamos a imagem de satélite
+          sem nuvem mais recente dos últimos 30 dias (Sentinel-2 ou Landsat 8/9), a chuva dos 7 dias anteriores
+          (GPM IMERG), a bacia e o mês em um modelo de aprendizado de máquina calibrado com
+          <span id="n-calib">468</span> medições da SEMARH-TO em 45 pontos, de 2017 a 2025.</p>
+        <p>Em cada pixel, o modelo usa a mediana dos pixels de água vizinhos, como no treino.
+          Só entram rios com mais de 60 m de largura e água presente em pelo menos metade do tempo.</p>
+        <p>Testado com cada ano deixado de fora do ajuste, o modelo acertou a classe de turbidez em
+          <span id="acerto-geral">69%</span> das coletas. Nos pontos da SEMARH com histórico, ele é corrigido pelo erro
+          típico daquele ponto e acerta <span id="acerto-ajuste">72%</span>. Valores acima de 40 NTU tendem a ser subestimados.</p>
+        <p>A turbidez é medida em NTU. Água abaixo de 5 NTU é clara; acima de 15 NTU já é visivelmente barrenta.</p>
+      </details>
+
+      <details class="sobre">
+        <summary>Fontes</summary>
+        <p>Medições: boletins de qualidade da água da SEMARH-TO. Imagens: Copernicus Sentinel-2 (ESA) e
+          Landsat 8/9 (USGS/NASA), via Google Earth Engine. Chuva: GPM IMERG (NASA). Rios e bacias: WWF HydroSHEDS.
+          Água superficial: JRC Global Surface Water.</p>
+      </details>
+
+      <div class="fundo-mapa" role="group" aria-label="Fundo do mapa">
+        <button data-fundo="mapa" aria-pressed="true">Mapa</button>
+        <button data-fundo="satelite" aria-pressed="false">Satélite</button>
+      </div>
+    </div>
+  </aside>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

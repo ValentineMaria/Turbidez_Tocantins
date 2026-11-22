@@ -1,0 +1,126 @@
+:root {
+  /* cores da própria água: clara, esverdeada, barrenta (as mesmas das telhas) */
+  --clara: #2f7f99;
+  --moderada: #a39443;
+  --turva: #8c4a22;
+  --sem: #a3acb0;
+
+  --fundo: #f5f7f7;
+  --superficie: #ffffff;
+  --tinta: #17292e;
+  --tinta-2: #55666b;
+  --linha: #dbe2e3;
+  --foco: #1d6f86;
+  --medido: #17292e;
+  --sombra: 0 1px 2px rgba(23, 41, 46, .08), 0 10px 28px rgba(23, 41, 46, .12);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --clara: #57aac2; --moderada: #c8b45a; --turva: #c47e50; --sem: #6b767a;
+    --fundo: #121c1f; --superficie: #19262a; --tinta: #e5eef0; --tinta-2: #a2b2b6;
+    --linha: #2b3a3f; --foco: #7cc6da; --medido: #e5eef0; --sombra: 0 10px 28px rgba(0, 0, 0, .5);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --clara: #57aac2; --moderada: #c8b45a; --turva: #c47e50; --sem: #6b767a;
+  --fundo: #121c1f; --superficie: #19262a; --tinta: #e5eef0; --tinta-2: #a2b2b6;
+  --linha: #2b3a3f; --foco: #7cc6da; --medido: #e5eef0; --sombra: 0 10px 28px rgba(0, 0, 0, .5);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: "Public Sans", system-ui, sans-serif; font-size: 15px; line-height: 1.5;
+  color: var(--tinta); background: var(--fundo); font-variant-numeric: tabular-nums;
+}
+#mapa { position: fixed; inset: 0; background: var(--fundo); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--foco); outline-offset: 2px; }
+
+#painel {
+  position: fixed; z-index: 1000; top: 16px; left: 16px; bottom: 16px; width: 380px;
+  display: flex; flex-direction: column; overflow: hidden;
+  background: var(--superficie); border-radius: 14px; box-shadow: var(--sombra);
+}
+.alca { display: none; }
+.cabecalho { padding: 20px 22px 12px; }
+h1 { font-size: 1.45rem; line-height: 1.2; font-weight: 700; margin: 0 0 6px; letter-spacing: -.01em; text-wrap: balance; }
+h2 { font-size: 1.05rem; font-weight: 650; margin: 0; line-height: 1.3; text-wrap: balance; }
+h3 { font-size: .9rem; font-weight: 600; margin: 18px 0 6px; }
+.sub { margin: 0; color: var(--tinta-2); font-size: .88rem; }
+
+/* escala contínua: a faixa de cor é a própria legenda */
+.escala { padding: 0 22px 14px; border-bottom: 1px solid var(--linha); }
+.barra { height: 12px; border-radius: 6px; }
+.marcas { position: relative; height: 30px; font-size: .78rem; color: var(--tinta-2); }
+.marcas span { position: absolute; top: 3px; transform: translateX(-50%); white-space: nowrap; }
+.marcas span::before { content: ""; position: absolute; left: 50%; top: -6px; width: 1px; height: 5px; background: var(--tinta-2); }
+.marcas .cls { top: 16px; font-weight: 600; color: var(--tinta); }
+.marcas .cls::before { display: none; }
+.resumo { margin: 4px 0 0; font-size: .85rem; color: var(--tinta-2); }
+
+.corpo { flex: 1; overflow-y: auto; padding: 16px 22px 20px; display: flex; flex-direction: column; gap: 18px; }
+.vazio p { margin: 0 0 6px; }
+.dica { color: var(--tinta-2); font-size: .88rem; }
+
+/* detalhe */
+.detalhe .local { color: var(--tinta-2); font-size: .88rem; margin: 2px 0 0; }
+.estimativa { margin-top: 14px; display: grid; gap: 2px; }
+.classe { display: inline-flex; align-items: center; gap: 7px; font-weight: 600; }
+.classe::before { content: ""; width: 11px; height: 11px; border-radius: 50%; background: var(--cor); }
+.valor { font-size: 1.9rem; font-weight: 700; line-height: 1.15; letter-spacing: -.02em; }
+.valor small { font-size: .95rem; font-weight: 500; color: var(--tinta-2); letter-spacing: 0; }
+.nota { color: var(--tinta-2); font-size: .86rem; margin: 2px 0 0; }
+dl.dados { display: grid; grid-template-columns: auto 1fr; gap: 3px 14px; margin: 12px 0 0; font-size: .86rem; }
+dl.dados dt { color: var(--tinta-2); }
+dl.dados dd { margin: 0; }
+
+/* confiabilidade: barra empilhada do que a água "realmente era" */
+.conf { margin-top: 6px; }
+.conf .pilha { display: flex; height: 10px; border-radius: 5px; overflow: hidden; gap: 2px; margin: 6px 0 4px; }
+.conf .pilha span { display: block; }
+.conf p { margin: 0; font-size: .86rem; }
+.conf .leg { color: var(--tinta-2); font-size: .8rem; }
+
+/* gráfico da série */
+.grafico svg { width: 100%; height: auto; display: block; overflow: visible; }
+.grafico .eixo text { fill: var(--tinta-2); font-size: 10px; }
+.grafico .eixo line, .grafico .grade { stroke: var(--linha); }
+.grafico .limite { stroke: var(--tinta-2); stroke-dasharray: 2 3; opacity: .6; }
+.grafico .lim-txt { fill: var(--tinta-2); font-size: 9px; }
+.legenda-graf { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: .8rem; color: var(--tinta-2); margin-top: 4px; }
+.legenda-graf span { display: inline-flex; align-items: center; gap: 5px; }
+.legenda-graf svg { width: 12px; height: 12px; }
+
+.sobre { font-size: .87rem; color: var(--tinta-2); }
+.sobre summary { cursor: pointer; color: var(--tinta); font-weight: 600; }
+.sobre p { margin: 8px 0 0; }
+
+.fundo-mapa { display: inline-flex; border: 1px solid var(--linha); border-radius: 8px; overflow: hidden; align-self: flex-start; }
+.fundo-mapa button { border: 0; background: none; padding: 6px 14px; cursor: pointer; font-size: .86rem; }
+.fundo-mapa button[aria-pressed="true"] { background: var(--tinta); color: var(--superficie); }
+
+.leaflet-container { font: inherit; background: var(--fundo); }
+.leaflet-tooltip { font: inherit; font-size: .82rem; }
+.leaflet-control-attribution { font-size: 10px; }
+
+@media (max-width: 720px) {
+  #painel { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-height: 75vh; border-radius: 16px 16px 0 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .alca { display: flex; justify-content: center; padding: 8px 0 0; background: none; border: 0; cursor: pointer; }
+  .alca-barra { width: 40px; height: 4px; border-radius: 2px; background: var(--linha); }
+  .cabecalho { padding: 6px 16px 8px; }
+  h1 { font-size: 1.12rem; }
+  .sub { font-size: .8rem; }
+  .escala { padding: 0 16px 10px; }
+  .resumo { display: none; }
+  .corpo { padding: 12px 16px 16px; display: none; }
+  #painel.aberto .corpo, #painel.com-detalhe .corpo { display: flex; }
+  #painel.com-detalhe:not(.aberto) .corpo > :not(.detalhe) { display: none; }
+  .leaflet-bottom { bottom: 120px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
