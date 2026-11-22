@@ -1,0 +1,56 @@
+name: Publicar site
+
+# Republica o site quando você muda o visual (pasta site/) ou acrescenta coletas da SEMARH (pasta dados/),
+# reaproveitando as últimas telhas calculadas.
+on:
+  push:
+    branches: [main]
+    paths: ['site/**', 'dados/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: mapa
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.publicar.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Últimas telhas
+        uses: actions/checkout@v4
+        continue-on-error: true      # antes da primeira atualização ainda não há telhas
+        with:
+          ref: telhas
+          path: _telhas
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Séries dos pontos
+        run: |
+          pip install pandas
+          python pipeline/series.py
+
+      - name: Montar o site
+        run: |
+          mkdir -p _site
+          cp -r site/* _site/
+          if [ -d _telhas ]; then rm -rf _telhas/.git; mkdir -p _site/telhas; cp -r _telhas/* _site/telhas/; fi
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: publicar
+        uses: actions/deploy-pages@v4
