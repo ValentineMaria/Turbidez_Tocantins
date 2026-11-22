@@ -35,8 +35,8 @@ def iniciar():
 
 # ---------------------------------------------------------------- bases fixas
 def limite_estado_remoto():
-    """Limite do Tocantins (FAO GAUL 2025; se os nomes de campo mudarem, cai para a versão 2015)."""
-    for colecao, campo in [('FAO/GAUL/2025/level1', 'gaul1_name'), ('FAO/GAUL/2025/level1', 'ADM1_NAME'),
+    """Limite do Tocantins (FAO GAUL 2025, campo GAUL1_NAME; se não achar, usa a versão 2015)."""
+    for colecao, campo in [('FAO/GAUL/2025/level1', 'GAUL1_NAME'), ('FAO/GAUL/2025/level1', 'gaul1_name'),
                            ('FAO/GAUL/2015/level1', 'ADM1_NAME')]:
         fc = ee.FeatureCollection(colecao).filter(ee.Filter.eq(campo, 'Tocantins'))
         try:
