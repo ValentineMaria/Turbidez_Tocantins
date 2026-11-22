@@ -24,16 +24,16 @@ jobs:
       name: github-pages
       url: ${{ steps.publicar.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Últimas telhas
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         continue-on-error: true      # antes da primeira atualização ainda não há telhas
         with:
           ref: telhas
           path: _telhas
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
 
@@ -48,9 +48,9 @@ jobs:
           cp -r site/* _site/
           if [ -d _telhas ]; then rm -rf _telhas/.git; mkdir -p _site/telhas; cp -r _telhas/* _site/telhas/; fi
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
       - id: publicar
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
