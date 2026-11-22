@@ -1,0 +1,10 @@
+# chaves: NUNCA enviar ao GitHub
+*service-account*.json
+*chave*.json
+monitoramento-de-turbidez-*.json
+.env
+# gerados a cada atualização
+_telhas/
+_site/
+_falhas.json
+__pycache__/
