@@ -36,10 +36,11 @@
     .fitBounds([[-13.5, -50.8], [-5.1, -45.6]], { paddingTopLeft: largo ? [400, 0] : [0, 0], paddingBottomRight: largo ? [0, 0] : [0, 140] });
   L.control.zoom({ position: 'topright' }).addTo(mapa);
   L.control.scale({ imperial: false, position: 'bottomright' }).addTo(mapa);
-  const escuro = matchMedia('(prefers-color-scheme: dark)').matches;
+  // OpenStreetMap (sem chave). No tema escuro, o CSS escurece só o fundo (variável --filtro-fundo).
   const fundos = {
-    mapa: L.tileLayer(`https://{s}.basemaps.cartocdn.com/${escuro ? 'dark' : 'light'}_all/{z}/{x}/{y}{r}.png`, {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>', subdomains: 'abcd', maxZoom: 19 }),
+    mapa: L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">colaboradores do OpenStreetMap</a>',
+      maxZoom: 19, className: 'fundo-osm' }),
     satelite: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       attribution: 'Imagens &copy; Esri, Maxar, Earthstar Geographics', maxZoom: 19 }),
   };

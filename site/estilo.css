@@ -13,6 +13,7 @@
   --foco: #1d6f86;
   --medido: #17292e;
   --sombra: 0 1px 2px rgba(23, 41, 46, .08), 0 10px 28px rgba(23, 41, 46, .12);
+  --filtro-fundo: saturate(.75);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -20,6 +21,7 @@
     --clara: #57aac2; --moderada: #c8b45a; --turva: #c47e50; --sem: #6b767a;
     --fundo: #121c1f; --superficie: #19262a; --tinta: #e5eef0; --tinta-2: #a2b2b6;
     --linha: #2b3a3f; --foco: #7cc6da; --medido: #e5eef0; --sombra: 0 10px 28px rgba(0, 0, 0, .5);
+    --filtro-fundo: invert(1) hue-rotate(180deg) brightness(.92) contrast(.85) saturate(.6);
     color-scheme: dark;
   }
 }
@@ -27,6 +29,7 @@
   --clara: #57aac2; --moderada: #c8b45a; --turva: #c47e50; --sem: #6b767a;
   --fundo: #121c1f; --superficie: #19262a; --tinta: #e5eef0; --tinta-2: #a2b2b6;
   --linha: #2b3a3f; --foco: #7cc6da; --medido: #e5eef0; --sombra: 0 10px 28px rgba(0, 0, 0, .5);
+    --filtro-fundo: invert(1) hue-rotate(180deg) brightness(.92) contrast(.85) saturate(.6);
   color-scheme: dark;
 }
 
@@ -105,6 +108,7 @@ dl.dados dd { margin: 0; }
 .fundo-mapa button[aria-pressed="true"] { background: var(--tinta); color: var(--superficie); }
 
 .leaflet-container { font: inherit; background: var(--fundo); }
+.fundo-osm { filter: var(--filtro-fundo); }
 .leaflet-tooltip { font: inherit; font-size: .82rem; }
 .leaflet-control-attribution { font-size: 10px; }
 
